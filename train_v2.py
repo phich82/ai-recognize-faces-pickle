@@ -8,8 +8,8 @@ from sklearn.preprocessing import Normalizer
 from tensorflow.keras.models import load_model
 
 ######pathsandvairables#########
-face_data = 'Faces/'
-path = "facenet_keras_weights.h5"
+face_data = 'data/faces/train'
+path = "models/pretrained/facenet_keras_weights.h5"
 required_shape = (160, 160)
 face_encoder = InceptionResNetV2()
 face_encoder.load_weights(path)
@@ -51,7 +51,7 @@ for face_names in os.listdir(face_data):
         encode = l2_normalizer.transform(np.expand_dims(encode, axis=0))[0]
         encoding_dict[face_names] = encode
 
-path = 'encodings/encodings.pkl'
+path = 'models/weights/encodings.pkl'
 with open(path, 'wb') as file:
     pickle.dump(encoding_dict, file)
 
